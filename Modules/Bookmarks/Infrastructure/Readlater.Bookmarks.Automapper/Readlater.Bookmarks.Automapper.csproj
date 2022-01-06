@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\ReadLater.Bookmarks.Domain.csproj" />
+    <ProjectReference Include="..\EntityFramework\ReadLater.Bookmarks.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

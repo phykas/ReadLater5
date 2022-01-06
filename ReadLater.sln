@@ -1,0 +1,87 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{90B4CCE7-F8D9-419D-A618-C56EC44879F5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bookmarks", "Bookmarks", "{E2B89CB4-C2BC-4637-8427-1E3924723275}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadLater.Bookmarks.Application", "Modules\Bookmarks\Application\ReadLater.Bookmarks.Application.csproj", "{5E5261D5-C880-4C51-9FFA-281FC64BB6AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadLater.Bookmarks.Domain", "Modules\Bookmarks\Domain\ReadLater.Bookmarks.Domain.csproj", "{9B1719FA-A52F-41E1-90EE-A6DFDBBA7DFC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadLater.Bookmarks.EntityFramework", "Modules\Bookmarks\Infrastructure\EntityFramework\ReadLater.Bookmarks.EntityFramework.csproj", "{E1B31621-59DA-4A77-9125-EF463F20373B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadLater.Bookmarks.Web", "Modules\Bookmarks\Web\ReadLater.Bookmarks.Web.csproj", "{FF3E59C1-660E-4BC8-9752-1E673F78F9FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadLater.Bookmarks.Init", "Modules\Bookmarks\Init\ReadLater.Bookmarks.Init.csproj", "{35701C42-3B29-4D12-A71A-F848DA75983D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{C5E589FC-A95A-4FA3-A731-EE77907A9AAC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mapper", "Mapper", "{A58EDAC9-D12F-4C63-934D-010FE8DC3808}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadLater.Mapper", "Libraries\Mapper\ReadLater.Mapper\ReadLater.Mapper.csproj", "{FAF7C00B-E427-426A-8E73-A505F69AE152}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReadLater.Automapper", "Libraries\Mapper\ReadLater.Automapper\ReadLater.Automapper.csproj", "{25532FDC-01F3-4182-9278-B902A097A619}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Readlater.Bookmarks.Automapper", "Modules\Bookmarks\Infrastructure\Readlater.Bookmarks.Automapper\Readlater.Bookmarks.Automapper.csproj", "{0853B409-E062-4C9F-B087-870C6C410718}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E5261D5-C880-4C51-9FFA-281FC64BB6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E5261D5-C880-4C51-9FFA-281FC64BB6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E5261D5-C880-4C51-9FFA-281FC64BB6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E5261D5-C880-4C51-9FFA-281FC64BB6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B1719FA-A52F-41E1-90EE-A6DFDBBA7DFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B1719FA-A52F-41E1-90EE-A6DFDBBA7DFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B1719FA-A52F-41E1-90EE-A6DFDBBA7DFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B1719FA-A52F-41E1-90EE-A6DFDBBA7DFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1B31621-59DA-4A77-9125-EF463F20373B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1B31621-59DA-4A77-9125-EF463F20373B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1B31621-59DA-4A77-9125-EF463F20373B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1B31621-59DA-4A77-9125-EF463F20373B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF3E59C1-660E-4BC8-9752-1E673F78F9FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF3E59C1-660E-4BC8-9752-1E673F78F9FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF3E59C1-660E-4BC8-9752-1E673F78F9FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF3E59C1-660E-4BC8-9752-1E673F78F9FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35701C42-3B29-4D12-A71A-F848DA75983D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35701C42-3B29-4D12-A71A-F848DA75983D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35701C42-3B29-4D12-A71A-F848DA75983D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35701C42-3B29-4D12-A71A-F848DA75983D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAF7C00B-E427-426A-8E73-A505F69AE152}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAF7C00B-E427-426A-8E73-A505F69AE152}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAF7C00B-E427-426A-8E73-A505F69AE152}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAF7C00B-E427-426A-8E73-A505F69AE152}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25532FDC-01F3-4182-9278-B902A097A619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25532FDC-01F3-4182-9278-B902A097A619}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25532FDC-01F3-4182-9278-B902A097A619}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25532FDC-01F3-4182-9278-B902A097A619}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0853B409-E062-4C9F-B087-870C6C410718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0853B409-E062-4C9F-B087-870C6C410718}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0853B409-E062-4C9F-B087-870C6C410718}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0853B409-E062-4C9F-B087-870C6C410718}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E2B89CB4-C2BC-4637-8427-1E3924723275} = {90B4CCE7-F8D9-419D-A618-C56EC44879F5}
+		{5E5261D5-C880-4C51-9FFA-281FC64BB6AE} = {E2B89CB4-C2BC-4637-8427-1E3924723275}
+		{9B1719FA-A52F-41E1-90EE-A6DFDBBA7DFC} = {E2B89CB4-C2BC-4637-8427-1E3924723275}
+		{E1B31621-59DA-4A77-9125-EF463F20373B} = {E2B89CB4-C2BC-4637-8427-1E3924723275}
+		{FF3E59C1-660E-4BC8-9752-1E673F78F9FA} = {E2B89CB4-C2BC-4637-8427-1E3924723275}
+		{35701C42-3B29-4D12-A71A-F848DA75983D} = {E2B89CB4-C2BC-4637-8427-1E3924723275}
+		{A58EDAC9-D12F-4C63-934D-010FE8DC3808} = {C5E589FC-A95A-4FA3-A731-EE77907A9AAC}
+		{FAF7C00B-E427-426A-8E73-A505F69AE152} = {A58EDAC9-D12F-4C63-934D-010FE8DC3808}
+		{25532FDC-01F3-4182-9278-B902A097A619} = {A58EDAC9-D12F-4C63-934D-010FE8DC3808}
+		{0853B409-E062-4C9F-B087-870C6C410718} = {E2B89CB4-C2BC-4637-8427-1E3924723275}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B3F7C4BC-025A-4D5A-B6FC-F660A22E3501}
+	EndGlobalSection
+EndGlobal
