@@ -11,12 +11,6 @@ using ReadLater.Bookmarks.Web.Infrastructure;
 using ReadLater.Utilities;
 using Westwind.AspNetCore.LiveReload;
 
-//todos
-//dodaj current user, bookmarks and categories per user
-//dodaj api token, kao field u bazi koji se random generise (guid) za svakog usera po potrebi
-//dodaj api pristup pomocu tokena
-//dodaj tracking modul
-//dodaj cqrs
 namespace ReadLater5
 {
     public class Startup
