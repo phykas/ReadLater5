@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Readlater.Bookmarks.Automapper;
 using ReadLater.Automapper;
 using ReadLater.Bookmarks.Application;
 using ReadLater.Bookmarks.Application.Bookmarks;
 using ReadLater.Bookmarks.Application.Mappers;
+using ReadLater.Bookmarks.Automapper;
 using ReadLater.Bookmarks.EntityFramework;
-using ReadLater.Mapper;
 
 namespace ReadLater.Bookmarks.Init
 {

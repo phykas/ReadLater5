@@ -13,8 +13,8 @@
     <ProjectReference Include="..\..\..\Libraries\Mapper\ReadLater.Automapper\ReadLater.Automapper.csproj" />
     <ProjectReference Include="..\Application\ReadLater.Bookmarks.Application.csproj" />
     <ProjectReference Include="..\Domain\ReadLater.Bookmarks.Domain.csproj" />
+    <ProjectReference Include="..\Infrastructure\Automapper\Readlater.Bookmarks.Automapper.csproj" />
     <ProjectReference Include="..\Infrastructure\EntityFramework\ReadLater.Bookmarks.EntityFramework.csproj" />
-    <ProjectReference Include="..\Infrastructure\Readlater.Bookmarks.Automapper\Readlater.Bookmarks.Automapper.csproj" />
   </ItemGroup>
 
 </Project>
