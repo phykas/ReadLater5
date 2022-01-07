@@ -6,8 +6,8 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Libraries\Mapper\ReadLater.Mapper\ReadLater.Mapper.csproj" />
+		<ProjectReference Include="..\Authentication\ReadLater.Bookmarks.Authentication.csproj" />
 		<ProjectReference Include="..\Domain\ReadLater.Bookmarks.Domain.csproj" />
-		<ProjectReference Include="..\ReadLater.Bookmarks.Authentication\ReadLater.Bookmarks.Authentication.csproj" />
 	</ItemGroup>
 
 </Project>
