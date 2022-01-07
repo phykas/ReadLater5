@@ -4,6 +4,7 @@
     }
 
     init(categoriesInputid) {
+        //FZ: would add debouncing with rxjs here
         $('input#' + categoriesInputid).typeahead({},
             {
                 name: 'categories',

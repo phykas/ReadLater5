@@ -16,7 +16,7 @@ namespace ReadLater.Bookmarks.Application
             _currentUserService = currentUserService;
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAsync()
+        public async Task<IEnumerable<CategoryDto>> GetForCurrentUserAsync()
         {
             var currentUser = await _currentUserService.Retrieve();
             return await _categoryRepository.GetByUserIdAsync(currentUser.Id);

@@ -22,7 +22,7 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
             _currentUserService = currentUser;
         }
 
-        public async Task<IEnumerable<BookmarkDto>> GetAsync()
+        public async Task<IEnumerable<BookmarkDto>> GetForCurrentUserAsync()
         {
             var currentUser = await _currentUserService.Retrieve();
             return await _bookmarksRepository.GetByUserIdAsync(currentUser.Id);

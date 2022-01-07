@@ -17,7 +17,7 @@ namespace ReadLater5.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexAsync()
         {
-            var model = await _categoryService.GetAsync();
+            var model = await _categoryService.GetForCurrentUserAsync();
             return View(model);
         }
 

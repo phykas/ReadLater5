@@ -7,7 +7,7 @@ namespace ReadLater.Bookmarks.Application
     public interface ICategoryService
     {
         Task<CategoryDto> CreateAsync(CategoryDto category);
-        Task<IEnumerable<CategoryDto>> GetAsync();
+        Task<IEnumerable<CategoryDto>> GetForCurrentUserAsync();
         Task<CategoryDto> GetAsync(int id);
         Task<CategoryDto> GetAsync(string name);
         Task<IEnumerable<CategoryDto>> SearchAsync(string query);
