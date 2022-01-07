@@ -43,6 +43,12 @@ namespace ReadLater5
             services.AddBookmarksModule(new BookmarksConfiguration(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();
+            services.AddAuthentication()
+                           .AddGoogle(options =>
+                           {
+                               options.ClientId = "google-client-id";
+                               options.ClientSecret = "google-client-secret";
+                           });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
