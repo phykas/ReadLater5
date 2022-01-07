@@ -13,11 +13,23 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Westwind.AspNetCore.LiveReload" Version="0.3.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libraries\Mapper\ReadLater.Automapper\ReadLater.Automapper.csproj" />
     <ProjectReference Include="..\Init\ReadLater.Bookmarks.Init.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Bookmarks\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\typeahead\" />
   </ItemGroup>
 
 </Project>

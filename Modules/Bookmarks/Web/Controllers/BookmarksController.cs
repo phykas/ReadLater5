@@ -1,23 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ReadLater.Bookmarks.Application;
+using ReadLater.Bookmarks.Application.Bookmarks;
+using ReadLater.Bookmarks.Application.Mappers;
 using ReadLater.Bookmarks.Domain;
 using System.Threading.Tasks;
 
 namespace ReadLater5.Controllers
 {
-    public class CategoriesController : Controller
-    {
-        private readonly ICategoryService _categoryService;
 
-        public CategoriesController(ICategoryService categoryService)
+    public class BookmarksController : Controller
+    {
+        private readonly IBookmarksService _bookmarksService;
+        private readonly IBookmarksMapperService _bookmarksMapper;
+
+        public BookmarksController(IBookmarksService bookmarksService, IBookmarksMapperService bookmarksMapper)
         {
-            _categoryService = categoryService;
+            _bookmarksService = bookmarksService;
+            _bookmarksMapper = bookmarksMapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> IndexAsync()
         {
-            var model = await _categoryService.GetAsync();
+            var model = await _bookmarksService.GetAsync();
             return View(model);
         }
 
@@ -28,12 +33,12 @@ namespace ReadLater5.Controllers
             {
                 return BadRequest();
             }
-            CategoryDto category = await _categoryService.GetAsync(id.Value);
-            if (category == null)
+            BookmarkDto bookmark = await _bookmarksService.GetAsync(id.Value);
+            if (bookmark == null)
             {
                 return NotFound();
             }
-            return View(category);
+            return View(bookmark);
 
         }
 
@@ -45,15 +50,15 @@ namespace ReadLater5.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync(CategoryDto category)
+        public async Task<IActionResult> CreateAsync(BookmarkCreateRequest bookmark)
         {
             if (ModelState.IsValid)
             {
-                await _categoryService.CreateAsync(category);
+                await _bookmarksService.CreateAsync(bookmark);
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            return View(bookmark);
         }
 
         [HttpGet]
@@ -64,26 +69,26 @@ namespace ReadLater5.Controllers
                 return BadRequest();
             }
 
-            CategoryDto category = await _categoryService.GetAsync(id.Value);
+            BookmarkDto bookmark = await _bookmarksService.GetAsync(id.Value);
 
-            if (category == null)
+            if (bookmark == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(_bookmarksMapper.Map<BookmarkDto, BookmarkEditRequest>(bookmark));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsync(CategoryDto category)
+        public async Task<IActionResult> EditAsync(BookmarkEditRequest bookmark)
         {
             if (ModelState.IsValid)
             {
-                await _categoryService.UpdateAsync(category);
+                await _bookmarksService.UpdateAsync(bookmark);
                 return RedirectToAction("Index");
             }
-            return View(category);
+            return View(bookmark);
         }
 
         [HttpGet]
@@ -94,22 +99,22 @@ namespace ReadLater5.Controllers
                 return BadRequest();
             }
 
-            CategoryDto category = await _categoryService.GetAsync(id.Value);
+            BookmarkDto bookmark = await _bookmarksService.GetAsync(id.Value);
 
-            if (category == null)
+            if (bookmark == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(bookmark);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmedAsync(int id)
         {
-            CategoryDto category = await _categoryService.GetAsync(id);
-            await _categoryService.DeleteAsync(category);
+            BookmarkDto bookmark = await _bookmarksService.GetAsync(id);
+            await _bookmarksService.DeleteAsync(bookmark);
             return RedirectToAction("Index");
         }
     }

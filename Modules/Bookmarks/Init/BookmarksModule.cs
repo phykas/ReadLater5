@@ -2,6 +2,8 @@
 using Readlater.Bookmarks.Automapper;
 using ReadLater.Automapper;
 using ReadLater.Bookmarks.Application;
+using ReadLater.Bookmarks.Application.Bookmarks;
+using ReadLater.Bookmarks.Application.Mappers;
 using ReadLater.Bookmarks.EntityFramework;
 using ReadLater.Mapper;
 
@@ -18,6 +20,8 @@ namespace ReadLater.Bookmarks.Init
             })));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IBookmarksService, BookmarksService>();
+            services.AddScoped<IBookmarksRepository, BookmarksRepository>();
             return services;
         }
     }

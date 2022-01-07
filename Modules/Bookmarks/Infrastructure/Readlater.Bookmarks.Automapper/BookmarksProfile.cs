@@ -10,6 +10,12 @@ namespace Readlater.Bookmarks.Automapper
         {
             CreateMap<CategoryDto, Category>();
             CreateMap<Category, CategoryDto>();
+
+            CreateMap<BookmarkDto, Bookmark>();
+            CreateMap<Bookmark, BookmarkDto>();
+            CreateMap<BookmarkCreateRequest, BookmarkDto>().ForMember(e => e.Category, c => c.Ignore());
+            CreateMap<BookmarkEditRequest, BookmarkDto>().ForMember(e => e.Category, c => c.Ignore());
+            CreateMap<BookmarkDto, BookmarkEditRequest>().ForMember(e => e.Category, c => c.MapFrom(e => e.Category.Name));
         }
     }
 }

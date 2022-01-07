@@ -50,13 +50,13 @@ namespace Data.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Categories", x => x.ID);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -166,24 +166,24 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bookmark",
+                name: "Bookmarks",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    URL = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Url = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     ShortDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Bookmark", x => x.ID);
+                    table.PrimaryKey("PK_Bookmarks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Bookmark_Categories_CategoryId",
+                        name: "FK_Bookmarks_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "ID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -227,8 +227,8 @@ namespace Data.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Bookmark_CategoryId",
-                table: "Bookmark",
+                name: "IX_Bookmarks_CategoryId",
+                table: "Bookmarks",
                 column: "CategoryId");
         }
 
@@ -250,7 +250,7 @@ namespace Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Bookmark");
+                name: "Bookmarks");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

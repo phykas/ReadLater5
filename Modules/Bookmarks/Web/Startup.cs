@@ -5,10 +5,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ReadLater.Automapper;
 using ReadLater.Bookmarks.EntityFramework;
 using ReadLater.Bookmarks.Init;
+using Westwind.AspNetCore.LiveReload;
 
+//todos
+//dodaj dodavanje kategoraja sa typeahead.js i obicnom impl
+//dodaj current user, bookmarks and categories per user
+//dodaj api token, kao field u bazi koji se random generise (guid) za svakog usera po potrebi
+//dodaj api pristup pomocu tokena
+//dodaj tracking modul
+//dodaj cqrs
 namespace ReadLater5
 {
     public class Startup
@@ -23,6 +30,7 @@ namespace ReadLater5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLiveReload();
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             //FZ: Would add a todo to move to Authentication module and assign a new database
@@ -39,6 +47,7 @@ namespace ReadLater5
         {
             if (env.IsDevelopment())
             {
+                app.UseLiveReload();
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }
@@ -60,8 +69,8 @@ namespace ReadLater5
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+                    pattern: "{controller=Home}/{action=Index}/{id?}").RequireAuthorization();
+                endpoints.MapRazorPages().RequireAuthorization();
             });
         }
     }

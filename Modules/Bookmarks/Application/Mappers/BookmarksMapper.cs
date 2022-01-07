@@ -1,11 +1,7 @@
 ﻿using ReadLater.Mapper;
 
-namespace ReadLater.Bookmarks.Application
+namespace ReadLater.Bookmarks.Application.Mappers
 {
-    public interface IBookmarksMapperService : IMapperService
-    {
-    }
-
     public class BookmarksMapper : IBookmarksMapperService
     {
         private readonly IMapperService _mapperService;
@@ -22,7 +18,7 @@ namespace ReadLater.Bookmarks.Application
 
         public TDestination Map<TSource, TDestination>(TSource source, TDestination destination)
         {
-            return _mapperService.Map<TSource, TDestination>(source, destination);
+            return _mapperService.Map(source, destination);
         }
     }
 }
