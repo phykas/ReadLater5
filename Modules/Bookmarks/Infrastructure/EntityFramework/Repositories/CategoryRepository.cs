@@ -28,22 +28,23 @@ namespace ReadLater.Bookmarks.EntityFramework
                 .Map<Category, CategoryDto>(categoryEntity.Entity);
         }
 
-        public async Task<IEnumerable<CategoryDto>> GetAsync()
+        public async Task<IEnumerable<CategoryDto>> GetByUserIdAsync(string userId)
         {
             return _mapperService
-                .Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(await _readLaterDataContext.Categories.ToListAsync());
+                .Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(
+                await _readLaterDataContext.Categories.Where(e => e.UserId == userId).ToListAsync());
         }
 
-        public async Task<CategoryDto> GetAsync(int id)
+        public async Task<CategoryDto> GetAsync(string userId, int id)
         {
             return _mapperService
-                .Map<Category, CategoryDto>(await _readLaterDataContext.Categories.Where(c => c.Id == id).FirstOrDefaultAsync());
+                .Map<Category, CategoryDto>(await _readLaterDataContext.Categories.Where(c => c.UserId == userId && c.Id == id).FirstOrDefaultAsync());
         }
 
-        public async Task<CategoryDto> GetAsync(string name)
+        public async Task<CategoryDto> GetAsync(string userId, string name)
         {
             return _mapperService
-                .Map<Category, CategoryDto>(await _readLaterDataContext.Categories.Where(c => c.Name == name).FirstOrDefaultAsync());
+                .Map<Category, CategoryDto>(await _readLaterDataContext.Categories.Where(c => c.UserId == userId && c.Name == name).FirstOrDefaultAsync());
         }
 
         public Task UpdateAsync(CategoryDto category)
@@ -63,11 +64,11 @@ namespace ReadLater.Bookmarks.EntityFramework
             await _readLaterDataContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<CategoryDto>> SearchAsync(string query)
+        public async Task<IEnumerable<CategoryDto>> SearchAsync(string userId, string query)
         {
             return _mapperService
                 .Map<IEnumerable<Category>, IEnumerable<CategoryDto>>
-                (await _readLaterDataContext.Categories.Where(e=> EF.Functions.Like(e.Name, $"%{query}%")).Take(10).ToListAsync());
+                (await _readLaterDataContext.Categories.Where(e => e.UserId == userId && EF.Functions.Like(e.Name, $"%{query}%")).Take(10).ToListAsync());
         }
     }
 }

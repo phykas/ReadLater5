@@ -12,5 +12,6 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
         Task<BookmarkDto> GetAsync(string url);
         Task UpdateAsync(BookmarkDto bookmark);
         Task DeleteAsync(BookmarkDto bookmark);
+        Task<IEnumerable<BookmarkDto>> GetByUserIdAsync(string userId);
     }
 }

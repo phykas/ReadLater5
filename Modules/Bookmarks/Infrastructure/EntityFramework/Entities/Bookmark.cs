@@ -8,6 +8,8 @@ namespace ReadLater.Bookmarks.EntityFramework.Entities
         [Key]
         public int Id { get; set; }
 
+        public string UserId { get; set; }
+
         [StringLength(maximumLength: 500)]
         public string Url { get; set; }
 

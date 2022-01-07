@@ -18,7 +18,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libraries\Mapper\ReadLater.Automapper\ReadLater.Automapper.csproj" />
+    <ProjectReference Include="..\..\..\Libraries\Utilities\RealLater.Utilities\ReadLater.Utilities.csproj" />
     <ProjectReference Include="..\Init\ReadLater.Bookmarks.Init.csproj" />
+    <ProjectReference Include="..\ReadLater.Bookmarks.Authentication\ReadLater.Bookmarks.Authentication.csproj" />
   </ItemGroup>
 
   <ItemGroup>

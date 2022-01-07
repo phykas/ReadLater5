@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
@@ -7,6 +7,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\Libraries\Mapper\ReadLater.Mapper\ReadLater.Mapper.csproj" />
 		<ProjectReference Include="..\Domain\ReadLater.Bookmarks.Domain.csproj" />
+		<ProjectReference Include="..\ReadLater.Bookmarks.Authentication\ReadLater.Bookmarks.Authentication.csproj" />
 	</ItemGroup>
 
 </Project>

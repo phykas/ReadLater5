@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ReadLater.Bookmarks.EntityFramework.Entities;
+using System.Linq;
 
 namespace ReadLater.Bookmarks.EntityFramework
 {
@@ -14,6 +15,10 @@ namespace ReadLater.Bookmarks.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Bookmark>()
+            .HasOne(e => e.Category)
+            .WithMany()
+            .OnDelete(DeleteBehavior.Cascade);
         }
 
         public DbSet<Category> Categories { get; set; }

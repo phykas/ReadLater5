@@ -7,10 +7,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ReadLater.Bookmarks.EntityFramework;
 using ReadLater.Bookmarks.Init;
+using ReadLater.Bookmarks.Web.Infrastructure;
+using ReadLater.Utilities;
 using Westwind.AspNetCore.LiveReload;
 
 //todos
-//dodaj dodavanje kategoraja sa typeahead.js i obicnom impl
 //dodaj current user, bookmarks and categories per user
 //dodaj api token, kao field u bazi koji se random generise (guid) za svakog usera po potrebi
 //dodaj api pristup pomocu tokena
@@ -37,6 +38,8 @@ namespace ReadLater5
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                            .AddEntityFrameworkStores<ReadLaterDataContext>();
 
+            services.AddUtilitiesModule();
+            services.AddInfrastructureModule();
             services.AddBookmarksModule(new BookmarksConfiguration(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllersWithViews();

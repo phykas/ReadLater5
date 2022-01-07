@@ -3,6 +3,7 @@ using ReadLater.Bookmarks.Application.Bookmarks;
 using ReadLater.Bookmarks.Application.Mappers;
 using ReadLater.Bookmarks.Domain;
 using ReadLater.Bookmarks.EntityFramework.Entities;
+using ReadLater.Utilities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,16 +14,20 @@ namespace ReadLater.Bookmarks.EntityFramework
     {
         private ReadLaterDataContext _readLaterDataContext;
         private readonly IBookmarksMapperService _mapperService;
+        private readonly IClock _clock;
 
-        public BookmarksRepository(ReadLaterDataContext readLaterDataContext, IBookmarksMapperService mapperService)
+        public BookmarksRepository(ReadLaterDataContext readLaterDataContext, IBookmarksMapperService mapperService, IClock clock)
         {
             _readLaterDataContext = readLaterDataContext;
             _mapperService = mapperService;
+            _clock = clock;
         }
 
         public async Task<BookmarkDto> CreateAsync(BookmarkDto bookmark)
         {
-            var bookmarkEntity = _readLaterDataContext.Add(_mapperService.Map<BookmarkDto, Bookmark>(bookmark));
+            var entity = _mapperService.Map<BookmarkDto, Bookmark>(bookmark);
+            entity.CreateDate = _clock.Now;
+            var bookmarkEntity = _readLaterDataContext.Add(entity);
             await _readLaterDataContext.SaveChangesAsync();
             return _mapperService
                 .Map<Bookmark, BookmarkDto>(bookmarkEntity.Entity);
@@ -40,6 +45,13 @@ namespace ReadLater.Bookmarks.EntityFramework
             return _mapperService
                 .Map<Bookmark, BookmarkDto>(await _readLaterDataContext.Bookmarks.Include(e => e.Category)
                 .Where(c => c.Id == id).FirstOrDefaultAsync());
+        }
+
+        public async Task<IEnumerable<BookmarkDto>> GetByUserIdAsync(string userId)
+        {
+            return _mapperService
+                .Map<IEnumerable<Bookmark>, IEnumerable<BookmarkDto>>(await _readLaterDataContext.Bookmarks
+                .Include(e => e.Category).Where(c => c.UserId == userId).ToListAsync());
         }
 
         public async Task<BookmarkDto> GetAsync(string url)

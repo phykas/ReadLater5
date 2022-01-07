@@ -1,4 +1,5 @@
 ﻿using ReadLater.Bookmarks.Application.Mappers;
+using ReadLater.Bookmarks.Authentication;
 using ReadLater.Bookmarks.Domain;
 using ReadLater.Mapper;
 using System.Collections.Generic;
@@ -11,39 +12,21 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
         private readonly IBookmarksRepository _bookmarksRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly IBookmarksMapperService _mapperService;
+        private readonly ICurrentUserService _currentUserService;
 
         public BookmarksService(IBookmarksRepository bookmarksRepository, ICategoryRepository categoryRepository,
-            IBookmarksMapperService mapperService)
+            IBookmarksMapperService mapperService, ICurrentUserService currentUser)
         {
             _bookmarksRepository = bookmarksRepository;
             _categoryRepository = categoryRepository;
             _mapperService = mapperService;
+            _currentUserService = currentUser;
         }
 
-        public async Task<BookmarkDto> CreateAsync(BookmarkCreateRequest bookmark)
+        public async Task<IEnumerable<BookmarkDto>> GetAsync()
         {
-            var category = await _categoryRepository.GetAsync(bookmark.Category);
-            var bookmarkDto = _mapperService.Map<BookmarkCreateRequest, BookmarkDto>(bookmark);
-            bookmarkDto.CategoryId = category?.Id;
-            if (category == null)
-            {
-                bookmarkDto.Category = new CategoryDto()
-                {
-                    Name = bookmark.Category
-                };
-            }
-
-            return await _bookmarksRepository.CreateAsync(bookmarkDto);
-        }
-
-        public Task DeleteAsync(BookmarkDto bookmark)
-        {
-            return _bookmarksRepository.DeleteAsync(bookmark);
-        }
-
-        public Task<IEnumerable<BookmarkDto>> GetAsync()
-        {
-            return _bookmarksRepository.GetAsync();
+            var currentUser = await _currentUserService.Retrieve();
+            return await _bookmarksRepository.GetByUserIdAsync(currentUser.Id);
         }
 
         public Task<BookmarkDto> GetAsync(int id)
@@ -51,21 +34,50 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
             return _bookmarksRepository.GetAsync(id);
         }
 
-        public Task<BookmarkDto> GetAsync(string name)
+        public Task<BookmarkDto> GetAsync(string url)
         {
-            return _bookmarksRepository.GetAsync(name);
+            return _bookmarksRepository.GetAsync(url);
         }
 
-        public async Task UpdateAsync(BookmarkEditRequest bookmark)
+        public async Task<BookmarkDto> CreateAsync(BookmarkCreateRequest bookmark)
         {
-            var category = await _categoryRepository.GetAsync(bookmark.Category);
-            var bookmarkDto = _mapperService.Map<BookmarkEditRequest, BookmarkDto>(bookmark);
+            var currentUser = await _currentUserService.Retrieve();
+            var category = await _categoryRepository.GetAsync(currentUser.Id, bookmark.Category);
+            var bookmarkDto = _mapperService.Map<BookmarkCreateRequest, BookmarkDto>(bookmark);
             bookmarkDto.CategoryId = category?.Id;
+            bookmarkDto.UserId = currentUser.Id;
             if (category == null)
             {
                 bookmarkDto.Category = new CategoryDto()
                 {
-                    Name = bookmark.Category
+                    Name = bookmark.Category,
+                    UserId = bookmarkDto.UserId
+                };
+            }
+
+            return await _bookmarksRepository.CreateAsync(bookmarkDto);
+        }
+
+        public async Task DeleteAsync(BookmarkDto bookmark)
+        {
+            var currentUser = await _currentUserService.Retrieve();
+            bookmark.UserId = currentUser.Id;
+            await _bookmarksRepository.DeleteAsync(bookmark);
+        }
+
+        public async Task UpdateAsync(BookmarkEditRequest bookmark)
+        {
+            var currentUser = await _currentUserService.Retrieve();
+            var category = await _categoryRepository.GetAsync(currentUser.Id, bookmark.Category);
+            var bookmarkDto = _mapperService.Map<BookmarkEditRequest, BookmarkDto>(bookmark);
+            bookmarkDto.CategoryId = category?.Id;
+            bookmarkDto.UserId = currentUser.Id;
+            if (category == null)
+            {
+                bookmarkDto.Category = new CategoryDto()
+                {
+                    Name = bookmark.Category,
+                    UserId = bookmarkDto.UserId
                 };
             }
             await _bookmarksRepository.UpdateAsync(bookmarkDto);

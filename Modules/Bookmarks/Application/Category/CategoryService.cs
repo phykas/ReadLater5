@@ -1,4 +1,5 @@
-﻿using ReadLater.Bookmarks.Domain;
+﻿using ReadLater.Bookmarks.Authentication;
+using ReadLater.Bookmarks.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -7,45 +8,57 @@ namespace ReadLater.Bookmarks.Application
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ICurrentUserService _currentUserService;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, ICurrentUserService currentUserService)
         {
             _categoryRepository = categoryRepository;
+            _currentUserService = currentUserService;
         }
 
-        public Task<CategoryDto> CreateAsync(CategoryDto category)
+        public async Task<IEnumerable<CategoryDto>> GetAsync()
         {
-            return _categoryRepository.CreateAsync(category);
+            var currentUser = await _currentUserService.Retrieve();
+            return await _categoryRepository.GetByUserIdAsync(currentUser.Id);
         }
 
-        public Task DeleteAsync(CategoryDto category)
+        public async Task<CategoryDto> GetAsync(int id)
         {
-            return _categoryRepository.DeleteAsync(category);
+            var currentUser = await _currentUserService.Retrieve();
+            return await _categoryRepository.GetAsync(currentUser.Id, id);
         }
 
-        public Task<IEnumerable<CategoryDto>> GetAsync()
+        public async Task<CategoryDto> GetAsync(string name)
         {
-            return _categoryRepository.GetAsync();
+            var currentUser = await _currentUserService.Retrieve();
+            return await _categoryRepository.GetAsync(currentUser.Id, name);
         }
 
-        public Task<CategoryDto> GetAsync(int id)
+        public async Task<CategoryDto> CreateAsync(CategoryDto category)
         {
-            return _categoryRepository.GetAsync(id);
+            var currentUser = await _currentUserService.Retrieve();
+            category.UserId = currentUser.Id;
+            return await _categoryRepository.CreateAsync(category);
         }
 
-        public Task<CategoryDto> GetAsync(string name)
+        public async Task DeleteAsync(CategoryDto category)
         {
-            return _categoryRepository.GetAsync(name);
+            var currentUser = await _currentUserService.Retrieve();
+            category.UserId = currentUser.Id;
+            await _categoryRepository.DeleteAsync(category);
         }
 
-        public Task UpdateAsync(CategoryDto category)
+        public async Task UpdateAsync(CategoryDto category)
         {
-            return _categoryRepository.UpdateAsync(category);
+            var currentUser = await _currentUserService.Retrieve();
+            category.UserId = currentUser.Id;
+            await _categoryRepository.UpdateAsync(category);
         }
 
-        Task<IEnumerable<CategoryDto>> ICategoryService.SearchAsync(string query)
+        public async Task<IEnumerable<CategoryDto>> SearchAsync(string query)
         {
-            return _categoryRepository.SearchAsync(query);
+            var currentUser = await _currentUserService.Retrieve();
+            return await _categoryRepository.SearchAsync(currentUser.Id, query);
         }
     }
 }
