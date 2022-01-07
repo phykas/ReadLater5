@@ -68,7 +68,7 @@ namespace ReadLater5.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateAsync(BookmarkCreateRequest bookmark)
+        public async Task<IActionResult> CreateAsync(BookmarkRequest bookmark)
         {
             if (ModelState.IsValid)
             {
@@ -94,12 +94,12 @@ namespace ReadLater5.Controllers
                 return NotFound();
             }
 
-            return View(_bookmarksMapper.Map<BookmarkDto, BookmarkEditRequest>(bookmark));
+            return View(_bookmarksMapper.Map<BookmarkDto, BookmarkRequest>(bookmark));
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditAsync(BookmarkEditRequest bookmark)
+        public async Task<IActionResult> EditAsync(BookmarkRequest bookmark)
         {
             if (ModelState.IsValid)
             {

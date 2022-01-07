@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ReadLater.Bookmarks.Domain
 {
-    public class BookmarkCreateRequest
+    public class BookmarkRequest
     {
+        public int? Id { get; set; }
 
         [StringLength(maximumLength: 500)]
         public string Url { get; set; }
@@ -13,7 +14,6 @@ namespace ReadLater.Bookmarks.Domain
 
         public string Category { get; set; }
 
-        public DateTime CreateDate { get; set; }
     }
 
 }
