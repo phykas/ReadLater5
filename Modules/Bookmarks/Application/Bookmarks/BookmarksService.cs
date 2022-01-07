@@ -82,5 +82,15 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
             }
             await _bookmarksRepository.UpdateAsync(bookmarkDto);
         }
+
+        public async Task TrackBookmarkUsageAsync(int id)
+        {
+            await _bookmarksRepository.TrackBookmarkUsageAsync(id);
+        }
+
+        public Task<IEnumerable<BookmarkDto>> GetMostVisitedAsync(int count)
+        {
+            return _bookmarksRepository.GetMostVisitedAsync(count);
+        }
     }
 }

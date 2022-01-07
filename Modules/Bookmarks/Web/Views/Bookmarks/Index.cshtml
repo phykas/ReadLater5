@@ -18,6 +18,12 @@
         <th>
             @Html.DisplayNameFor(model => model.Category)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ClickCount)
+        </th>
+        <th>
+            Short url
+        </th>
         <th></th>
     </tr>
 
@@ -25,10 +31,17 @@
     {
         <tr>
             <td>
-                <a href="@item.Url">@item.Url</a>
+                @Html.ActionLink(item.Url, "GotoLink", "Bookmarks", new {id = item.Id}, new {target ="_blank"})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClickCount)
+            </td>
+            <td>
+                @Html.RouteLink(Url.Link("Goto", new { Controller = "Goto", id = item.Id }), "goto",
+            new {Controller = "Goto", id = item.Id}, new {target ="_blank"})
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |

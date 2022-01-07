@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ReadLater.Bookmarks.Application;
 using ReadLater.Bookmarks.Application.Bookmarks;
 using ReadLater.Bookmarks.Application.Mappers;
 using ReadLater.Bookmarks.Domain;
@@ -7,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace ReadLater5.Controllers
 {
-
     public class BookmarksController : Controller
     {
         private readonly IBookmarksService _bookmarksService;
@@ -17,6 +15,26 @@ namespace ReadLater5.Controllers
         {
             _bookmarksService = bookmarksService;
             _bookmarksMapper = bookmarksMapper;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GotoLinkAsync(int? id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            BookmarkDto bookmark = await _bookmarksService.GetAsync(id.Value);
+
+            if (bookmark == null)
+            {
+                return NotFound();
+            }
+
+            await _bookmarksService.TrackBookmarkUsageAsync(bookmark.Id);
+
+            return Redirect(bookmark.Url);
         }
 
         [HttpGet]

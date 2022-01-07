@@ -13,5 +13,7 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
         Task UpdateAsync(BookmarkDto bookmark);
         Task DeleteAsync(BookmarkDto bookmark);
         Task<IEnumerable<BookmarkDto>> GetByUserIdAsync(string userId);
+        Task TrackBookmarkUsageAsync(int id);
+        Task<IEnumerable<BookmarkDto>> GetMostVisitedAsync(int count);
     }
 }

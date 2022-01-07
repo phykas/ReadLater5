@@ -1,0 +1,19 @@
+﻿@using ReadLater.Bookmarks.Domain
+
+@model IEnumerable<BookmarkDto>
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>Most visited bookmarks</h1>
+        </hgroup>
+        <ul class="list-group">
+            @foreach (var item in Model)
+            {
+                <li class="list-group-item">
+                    @Html.RouteLink(@item.Url, "goto", new {Controller = "Goto", id = item.Id}, new {target ="_blank"})
+                    <span class="badge badge-primary badge-pill">@item.ClickCount</span>
+                </li>
+            }
+        </ul>
+    </div>
+</section>

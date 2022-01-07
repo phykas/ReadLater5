@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ReadLater.Bookmarks.EntityFramework;
 
 namespace Data.Migrations
 {
     [DbContext(typeof(ReadLaterDataContext))]
-    partial class ReadLaterDataContextModelSnapshot : ModelSnapshot
+    [Migration("20220107191902_AddTrackingReporting")]
+    partial class AddTrackingReporting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

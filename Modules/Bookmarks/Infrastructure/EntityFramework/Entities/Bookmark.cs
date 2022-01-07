@@ -20,5 +20,7 @@ namespace ReadLater.Bookmarks.EntityFramework.Entities
         public virtual Category Category { get; set; }
 
         public DateTime CreateDate { get; set; }
+
+        public int ClickCount { get; set; }
     }
 }

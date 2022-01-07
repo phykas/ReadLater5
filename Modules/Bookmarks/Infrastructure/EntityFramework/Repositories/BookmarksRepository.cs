@@ -77,5 +77,20 @@ namespace ReadLater.Bookmarks.EntityFramework
             _readLaterDataContext.Bookmarks.Remove(bookmark);
             await _readLaterDataContext.SaveChangesAsync();
         }
+
+        public async Task TrackBookmarkUsageAsync(int id)
+        {
+            var bookmark = await _readLaterDataContext.Bookmarks.FirstOrDefaultAsync(e => e.Id == id);
+            bookmark.ClickCount++;
+            _readLaterDataContext.Update(bookmark);
+            await _readLaterDataContext.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<BookmarkDto>> GetMostVisitedAsync(int count)
+        {
+            return _mapperService
+                           .Map<IEnumerable<Bookmark>, IEnumerable<BookmarkDto>>(await _readLaterDataContext.Bookmarks
+                           .Include(e => e.Category).OrderByDescending(e => e.ClickCount).Take(count).ToListAsync());
+        }
     }
 }
