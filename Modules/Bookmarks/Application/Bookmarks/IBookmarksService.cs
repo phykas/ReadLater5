@@ -7,7 +7,7 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
     public interface IBookmarksService
     {
         Task<BookmarkDto> CreateAsync(BookmarkCreateRequest bookmark);
-        Task<IEnumerable<BookmarkDto>> GetForCurrentUserAsync();
+        Task<IEnumerable<BookmarkDto>> GetAsync();
         Task<BookmarkDto> GetAsync(int id);
         Task<BookmarkDto> GetAsync(string name);
         Task UpdateAsync(BookmarkCreateRequest bookmark);

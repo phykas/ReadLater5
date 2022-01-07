@@ -14,6 +14,7 @@ namespace ReadLater.Bookmarks.Domain
 
         public string Category { get; set; }
 
+        public int ClickCount { get; set; }
     }
 
 }

@@ -40,7 +40,7 @@ namespace ReadLater5.Controllers
         [HttpGet]
         public async Task<IActionResult> IndexAsync()
         {
-            var model = await _bookmarksService.GetForCurrentUserAsync();
+            var model = await _bookmarksService.GetAsync();
             return View(model);
         }
 
