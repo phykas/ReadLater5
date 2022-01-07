@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ReadLater.Bookmarks.Domain
 {
-    public class BookmarkRequest
+    public class BookmarkCreateRequest
     {
         public int? Id { get; set; }
 

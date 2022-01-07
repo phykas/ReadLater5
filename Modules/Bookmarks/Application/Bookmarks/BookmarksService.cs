@@ -38,7 +38,7 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
             return _bookmarksRepository.GetAsync(url);
         }
 
-        public async Task<BookmarkDto> CreateAsync(BookmarkRequest bookmark)
+        public async Task<BookmarkDto> CreateAsync(BookmarkCreateRequest bookmark)
         {
             return await _bookmarksRepository.CreateAsync(await MapToDtoAsync(bookmark));
         }
@@ -50,7 +50,7 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
             await _bookmarksRepository.DeleteAsync(bookmark);
         }
 
-        public async Task UpdateAsync(BookmarkRequest bookmark)
+        public async Task UpdateAsync(BookmarkCreateRequest bookmark)
         {
             await _bookmarksRepository.UpdateAsync(await MapToDtoAsync(bookmark));
         }
@@ -65,11 +65,11 @@ namespace ReadLater.Bookmarks.Application.Bookmarks
             return _bookmarksRepository.GetMostVisitedAsync(count);
         }
 
-        private async Task<BookmarkDto> MapToDtoAsync(BookmarkRequest request)
+        private async Task<BookmarkDto> MapToDtoAsync(BookmarkCreateRequest request)
         {
             var currentUser = await _currentUserService.Retrieve();
             var category = await _categoryRepository.GetAsync(currentUser.Id, request.Category);
-            var bookmarkDto = _mapperService.Map<BookmarkRequest, BookmarkDto>(request);
+            var bookmarkDto = _mapperService.Map<BookmarkCreateRequest, BookmarkDto>(request);
             bookmarkDto.CategoryId = category?.Id;
             bookmarkDto.UserId = currentUser.Id;
             if (category == null)
